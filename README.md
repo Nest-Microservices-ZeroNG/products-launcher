@@ -2,7 +2,8 @@
 
 1. Clone repository
 2. Create `.env` file based on `.env.template`
-3. Run `docker compose up --build` to start
+3. Execute command to rebuild submodules `git submodule update --init --recursive`
+4. Run `docker compose up --build` to start
 
 
 ### Pasos para crear los Git Submodules
