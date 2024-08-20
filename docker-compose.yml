@@ -6,7 +6,6 @@ services:
     image: nats:latest
     ports:
       - "8222:8222"
-
   client-gateway:
     build: ./client-gateway
     ports:
@@ -76,3 +75,17 @@ services:
       - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
       - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
       - STRIPE_WEBHOOK_ENDPOINT_SECRET=${STRIPE_WEBHOOK_ENDPOINT_SECRET}
+  #---------------------------------------------------------
+  # PAYMENTS MICROSERVICE
+  #---------------------------------------------------------
+  auth-ms:
+    container_name: auth-ms
+    build: ./auth-ms
+    # ports:
+    #   - "3004:3004"
+    volumes:
+      - ./auth-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3004
+      - NATS_SERVERS=nats://nats-server:4222
