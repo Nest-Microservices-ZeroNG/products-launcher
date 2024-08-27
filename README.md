@@ -4,37 +4,52 @@
 2. Create `.env` file based on `.env.template`
 3. Execute command to rebuild submodules `git submodule update --init --recursive`
 4. Run `docker compose up --build` to start
+5. Run `docker compose -f docker-compose.prod.yml build --no-cache` for Production
 
 
-### Pasos para crear los Git Submodules
+### Steps to create Git Submodules
 
 
-1. Crear un nuevo repositorio en GitHub
-2. Clonar el repositorio en la máquina local
-3. Añadir el submodule, donde `repository_url` es la url del repositorio y `directory_name` es el nombre de la carpeta donde quieres que se guarde el sub-módulo (no debe de existir en el proyecto)
+1. Create a new repository on GitHub
+2. Clone the repository on local machine
+3. Add the submodule, where `repository_url` is the url of the repository and `directory_name` is the name of the folder where you want the submodule to be stored (it should not exist in the project)
 ```
 git submodule add <repository_url> <directory_name>
 ```
-4. Añadir los cambios al repositorio (git add, git commit, git push)
-Ej:
+4. Add changes to repository (git add, git commit, git push)
+Ex:
 ```
 git add .
-git commit -m "Add submodule"
+git commit -m ‘Add submodule’
 git push
 ```
-5. Inicializar y actualizar Sub-módulos, cuando alguien clona el repositorio por primera vez, debe de ejecutar el siguiente comando para inicializar y actualizar los sub-módulos
+5. Initialise and update Sub-modules, when someone clones the repository for the first time, they should run the following command to initialise and update the sub-modules
 ```
 git submodule update --init --recursive
 ```
-6. Para actualizar las referencias de los sub-módulos
+6. To update the submodule references
 ```
 git submodule update --remote
 ```
 
 
-## Importante
-Si se trabaja en el repositorio que tiene los sub-módulos, **primero actualizar y hacer push** en el sub-módulo y **después** en el repositorio principal. 
 
-Si se hace al revés, se perderán las referencias de los sub-módulos en el repositorio principal y tendremos que resolver conflictos.
+## PRODUCTION
+1. Clone the repository
+2. Create .env based on .env.template
+3. Run following command
+```
+docker compose -f docker-compose.prod.yml build
+```
+Run containers
+```
+docker compose -f docker-compose.prod.yml up
+```
+
+
+## Importante
+If working in the repository that has the sub-modules, **first update and push** the sub-module and **then** the main repository. 
+
+If you do it the other way around, you will lose references to the sub-modules in the main repository and you will have to resolve conflicts.
 
 
